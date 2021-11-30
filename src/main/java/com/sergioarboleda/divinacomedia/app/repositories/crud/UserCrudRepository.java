@@ -5,7 +5,8 @@
 package com.sergioarboleda.divinacomedia.app.repositories.crud;
 
 import com.sergioarboleda.divinacomedia.app.models.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
  *
  * @author cristhianrg
  */
-public interface UserCrudRepository extends CrudRepository<User, Integer> {
+public interface UserCrudRepository extends MongoRepository<User, Integer> {
     
     
     /**
@@ -39,7 +40,9 @@ public interface UserCrudRepository extends CrudRepository<User, Integer> {
      * @return 
      */
     public Optional<User> findByEmail(String email);
-   
+    
+    @Query("{id:?0}")
+    public Optional<User> getUserById(Integer id);
     
     /**
      * 
@@ -48,4 +51,13 @@ public interface UserCrudRepository extends CrudRepository<User, Integer> {
      * @return 
      */
     public Optional<User> findByEmailAndPassword(String email, String password);
+    
+    /**
+     * 
+     * @param id
+     * @param email
+     * @param name
+     * @return 
+     */
+    public List<User> findByIdOrEmailOrName(Integer id, String email, String name);
 }

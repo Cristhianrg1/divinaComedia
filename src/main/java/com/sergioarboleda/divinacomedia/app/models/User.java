@@ -5,41 +5,36 @@
 package com.sergioarboleda.divinacomedia.app.models;
 
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import java.util.Date;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+//import org.springframework.data.annotation.Id;
 
 /**
  *
  * @author cristhianrg
  */
-
-
 @Data //evitamos tener que agregar los getter and setters
 @NoArgsConstructor //evitamos el constructor vacio
 @AllArgsConstructor //evitamos tener de agregar e onstructor con los parametros
-@Entity
-@Table(name="user") // con table le damos el nombre a la tabla
-public class User implements Serializable{
+@Document(collection = "usuarios")
+public class User {
     
     
     
     @Id // se debe definir un Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Con esto generamos el Id de forma incremental automatico
     private Integer id;
-    @Column(name="user_mail", unique = true, length = 50, nullable = false) // Dar nombre a la columna, indicar que es unica, el tamano y si puede ser null o no
-    private String email;
-    @Column(name="user_password", length = 50, nullable = false) // Dar nombre a la columna, indicar que es unica, el tamano y si puede ser null o no
-    private String password;
-    @Column(name="user_name", length = 80, nullable = false) // Dar nombre a la columna, indicar que es unica, el tamano y si puede ser null o no
+    private String identification;
     private String name;
-    
-    
+    private Date birthtDay;
+    private String monthBirthtDay;
+    private String address;
+    private String cellPhone;
+    private String email;
+    private String password;
+    private String zone;
+    private String type;
 }

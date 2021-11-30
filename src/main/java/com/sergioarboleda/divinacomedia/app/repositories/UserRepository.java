@@ -90,5 +90,24 @@ public class UserRepository {
     public User save(User user){
         return repository.save(user);
     }
+    
+    /**
+     * 
+     * @param id 
+     */
+    public void delete(Integer id){
+        repository.deleteById(id);
+    }
+    
+    /**
+     * 
+     * @param id
+     * @param email
+     * @param name
+     * @return 
+     */
+    public List<User> getUserByIdOrEmailOrName(Integer id, String email, String name){
+       return repository.findByIdOrEmailOrName(id, email, name);
+    }
             
 }

@@ -28,7 +28,7 @@ public class HairProductController {
      * @return 
      */
     @GetMapping("/all")
-    public List<HairProduct> getProducts(){
+    public List<HairProduct> get(){
         return service.getAll();
     }
     
@@ -54,5 +54,11 @@ public class HairProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public HairProduct update(@RequestBody HairProduct product){
         return service.update(product);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete (@PathVariable("id")String id){
+       service.delete(id);
     }
 }

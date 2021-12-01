@@ -4,6 +4,7 @@
  */
 package com.sergioarboleda.divinacomedia.app.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,14 +22,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class HairProduct {
     
     @Id
-    private String reference;
+    @JsonProperty("reference")
+    private String id;
+    @JsonProperty("brand")
     private String brand;
+    @JsonProperty("category")
     private String category;
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("description")
     private String description;
-    private boolean availability = true;
+    @JsonProperty("availability")
+    private boolean availability;
+    @JsonProperty("price")
     private double price;
+    @JsonProperty("quantity")
     private int quantity;
+    @JsonProperty("photography")
     private String photography;
     
 }

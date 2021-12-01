@@ -29,14 +29,7 @@ public class HairProductService {
         return repository.getAll();
     }
     
-    /**
-     * 
-     * @param reference
-     * @return 
-     */
-    public Optional<HairProduct> getProductById(String reference){
-        return repository.getByReference(reference);
-    }
+    
     
     /**
      * 
@@ -44,30 +37,17 @@ public class HairProductService {
      * @return 
      */
     public HairProduct save(HairProduct product){
-        if(product.getReference()==null){
-            return product;
+        Optional<HairProduct> existProduct = repository.getByReference(product.getId());
+        if(existProduct.isEmpty()){
+            return repository.save(product);
         }else{
-            Optional<HairProduct> existProduct = repository.getByReference(product.getReference());
-            if(existProduct.isEmpty()){
-                return repository.save(product);
-            }else{
-                return product;
-            }
+            return product;
         }
     }
     
     
-    /**
-     * 
-     * @param reference
-     * @return 
-     */
-    public boolean delete(String reference){
-        Boolean aBoolean = getProductById(reference).map(product -> {
-            repository.delete(product.getReference());
-            return true;
-        }).orElse(false);
-        return aBoolean;
+    public void delete(String id){
+        repository.delete(id);
     }
     
     
@@ -76,38 +56,23 @@ public class HairProductService {
      * @param product
      * @return 
      */
-    public HairProduct update(HairProduct product){
-        Optional<HairProduct> existProduct = repository.getByReference(product.getReference());
-        if(existProduct.isPresent()){
-            if(product.getBrand()!=null){
-                existProduct.get().setBrand(product.getBrand());
-            }
-            if(product.getCategory()!=null){
-                existProduct.get().setCategory(product.getCategory());
-            }
-            if(product.getName()!=null){
-                existProduct.get().setName(product.getName());
-            }
-            if(product.getDescription()!=null){
-                existProduct.get().setDescription(product.getDescription());
-            }
-            
-            existProduct.get().setPrice(product.getPrice());
-            
-            
-            existProduct.get().setQuantity(product.getQuantity());
-            
-            
-            if(product.getPhotography()!=null){
-                existProduct.get().setPhotography(product.getPhotography());
-            }
-            
-            existProduct.get().setAvailability(product.isAvailability());
-            
-            
-            return repository.save(existProduct.get());
-        }else{
+    public HairProduct update(HairProduct product) {
+        Optional<HairProduct> existsProduct = repository.getByReference(product.getId());
+        if (!existsProduct.isEmpty()) {
+            existsProduct.get().setId(product.getId());
+            existsProduct.get().setBrand(product.getBrand());
+            existsProduct.get().setCategory(product.getCategory());
+            existsProduct.get().setName(product.getName());
+            existsProduct.get().setDescription(product.getDescription());
+            existsProduct.get().setAvailability(product.isAvailability());
+            existsProduct.get().setPrice(product.getPrice());
+            existsProduct.get().setQuantity(product.getQuantity());
+            existsProduct.get().setPhotography(product.getPhotography());
+
+            return repository.save(existsProduct.get());
+        } else {
             return product;
         }
     }
+  
 }

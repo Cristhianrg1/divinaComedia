@@ -28,28 +28,29 @@ public class HairProductRepository {
     
     /**
      * 
-     * @param reference
-     * @return 
-     */
-    public Optional<HairProduct> getByReference(String reference){
-        return repository.findById(reference);
-    }
-    
-    /**
-     * 
      * @param product
      * @return 
      */
-    public HairProduct save(HairProduct product){
+    public HairProduct save(HairProduct product) {
         return repository.save(product);
     }
     
     /**
      * 
+     * @param id
+     * @return 
+     */
+    public Optional<HairProduct> getByReference(String id) {
+        return repository.findById(id);
+    }
+    
+    
+    /**
+     * 
      * @param id 
      */
-    public void delete(String reference){
-        repository.deleteById(reference);
+    public void delete(String id){
+        repository.deleteById(id);
     }
     
 }

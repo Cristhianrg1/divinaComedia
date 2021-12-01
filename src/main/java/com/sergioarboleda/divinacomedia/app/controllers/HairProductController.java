@@ -28,7 +28,7 @@ public class HairProductController {
      * @return 
      */
     @GetMapping("/all")
-    public List<HairProduct> getUsers(){
+    public List<HairProduct> getProducts(){
         return service.getAll();
     }
     

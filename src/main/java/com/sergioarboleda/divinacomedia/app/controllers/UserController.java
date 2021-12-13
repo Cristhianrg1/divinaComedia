@@ -83,4 +83,14 @@ public class UserController {
         return service.getUserByEmailAndPassword(email, password);
     }
     
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable("id") Integer id){
+        return service.getUserByIdUser(id);
+    }
+    
 }

@@ -36,6 +36,15 @@ public class UserService {
     
     /**
      * 
+     * @param id
+     * @return 
+     */
+    public User getUserByIdUser(Integer id){
+        return getUserById(id).orElse(new User());
+    }
+    
+    /**
+     * 
      * @param user
      * @return 
      */

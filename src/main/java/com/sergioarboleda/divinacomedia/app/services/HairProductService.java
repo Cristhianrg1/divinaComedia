@@ -74,5 +74,9 @@ public class HairProductService {
             return product;
         }
     }
+    
+    public Optional<HairProduct> getProductById(String id){
+        return repository.getByReference(id);
+    }
   
 }

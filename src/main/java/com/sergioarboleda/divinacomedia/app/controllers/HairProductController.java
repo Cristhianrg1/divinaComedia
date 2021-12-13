@@ -7,6 +7,7 @@ package com.sergioarboleda.divinacomedia.app.controllers;
 import com.sergioarboleda.divinacomedia.app.models.HairProduct;
 import com.sergioarboleda.divinacomedia.app.services.HairProductService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -56,9 +57,18 @@ public class HairProductController {
         return service.update(product);
     }
     
+    /**
+     * 
+     * @param id 
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete (@PathVariable("id")String id){
        service.delete(id);
+    }
+    
+    @GetMapping("/{id}")
+    public Optional<HairProduct> getProduct(@PathVariable("id") String id){
+        return service.getProductById(id);
     }
 }
